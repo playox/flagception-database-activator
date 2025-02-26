@@ -1,3 +1,6 @@
+## [2.0.0]
+- Update to new flagception sdk version 2.0 @migo315
+
 ## [1.1.1]
 - Parametrize sql query to avoid postgres error @martingtheodo
 

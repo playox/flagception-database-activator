@@ -84,7 +84,7 @@ class DatabaseActivator implements FeatureActivatorInterface
      *
      * @throws DBALException|DBALDriverException
      */
-    public function isActive($name, Context $context): bool
+    public function isActive(string $name, Context $context): bool
     {
         $this->setup();
 
