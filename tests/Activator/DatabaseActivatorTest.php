@@ -87,15 +87,11 @@ class DatabaseActivatorTest extends TestCase
      */
     public function testSetConnectByPdo()
     {
-        $activator = new DatabaseActivator([
-            'pdo' => $pdo = $this->createMock(PDO::class)
-        ]);
+        $pdo = new PDO('sqlite::memory:');
 
-        $pdo
-            ->expects(static::once())
-            ->method('getAttribute')
-            ->with(PDO::ATTR_DRIVER_NAME)
-            ->willReturn('mysql');
+        $activator = new DatabaseActivator([
+            'pdo' => $pdo
+        ]);
 
         static::assertInstanceOf(Connection::class, $activator->getConnection());
     }
