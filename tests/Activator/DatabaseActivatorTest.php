@@ -71,27 +71,7 @@ class DatabaseActivatorTest extends TestCase
      */
     public function testSetConnectByUri()
     {
-        $activator = new DatabaseActivator([
-            'url' => 'mysql://user:secret@localhost/mydb'
-        ]);
-
-        static::assertInstanceOf(Connection::class, $activator->getConnection());
-    }
-
-    /**
-     * Test connection by pdo
-     *
-     * @return void
-     *
-     * @throws DBALException
-     */
-    public function testSetConnectByPdo()
-    {
-        $pdo = new PDO('sqlite::memory:');
-
-        $activator = new DatabaseActivator([
-            'pdo' => $pdo
-        ]);
+        $activator = new DatabaseActivator('pdo-mysql://user:secret@localhost/mydb');
 
         static::assertInstanceOf(Connection::class, $activator->getConnection());
     }
@@ -122,9 +102,7 @@ class DatabaseActivatorTest extends TestCase
     public function testActiveStates()
     {
         $activator = new DatabaseActivator(
-            [
-                'url' => 'sqlite:///:memory:'
-            ],
+            'pdo-sqlite://:memory:',
             [
                 'db_table' => 'my_feature_table',
                 'db_column_feature' => 'foo_feature_name',

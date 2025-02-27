@@ -7,6 +7,7 @@ use Doctrine\DBAL\Driver\Exception as DBALDriverException;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Tools\DsnParser;
 use Flagception\Activator\FeatureActivatorInterface;
 use Flagception\Model\Context;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -50,13 +51,16 @@ class DatabaseActivator implements FeatureActivatorInterface
     /**
      * DatabaseActivator constructor.
      *
-     * @param Connection|array<string> $clientOrDsn
+     * @param Connection|string|array<string> $clientOrDsn
      * @param array<string> $options
      */
     public function __construct($clientOrDsn, array $options = [])
     {
         if ($clientOrDsn instanceof Connection) {
             $this->connection = $clientOrDsn;
+        } elseif (is_string($clientOrDsn)) {
+            $dnsParser = new DsnParser();
+            $this->dsn = $dnsParser->parse($clientOrDsn);
         } else {
             $this->dsn = $clientOrDsn;
         }
@@ -111,7 +115,7 @@ class DatabaseActivator implements FeatureActivatorInterface
      */
     private function setup(): void
     {
-        $manager = $this->getConnection()->getSchemaManager();
+        $manager = $this->getConnection()->createSchemaManager();
         if ($this->tablesExist === true || $manager->tablesExist([$this->options['db_table']]) === true) {
             $this->tablesExist = true;
 
