@@ -23,7 +23,7 @@ class YourClass
 {
     public function run()
     {
-        $activator = new DatabaseActivator(['url' => 'mysql://user:secret@localhost/mydb']);
+        $activator = new DatabaseActivator('pdo-mysql://user:secret@localhost/mydb');
         
         $manager = new FeatureManager($activator);
         if ($manager->isActive('your_feature_name')) {
@@ -69,27 +69,7 @@ class YourClass
 {
     public function run()
     {
-        $activator = new DatabaseActivator([
-            'url' => 'mysql://user:secret@localhost/mydb'
-        ]);
-        
-        // ...
-    }
-}
-```
-
-###### PDO instance
-
-```
-// YourClass.php
-
-class YourClass
-{
-    public function run()
-    {
-        $activator = new DatabaseActivator([
-            'pdo' => $this->myPdoInstance
-        ]);
+        $activator = new DatabaseActivator('pdo-mysql://user:secret@localhost/mydb');
         
         // ...
     }
@@ -127,7 +107,7 @@ class YourClass
 {
     public function run()
     {
-        $activator = new DatabaseActivator(['url' => 'mysql://user:secret@localhost/mydb'], [
+        $activator = new DatabaseActivator('pdo-mysql://user:secret@localhost/mydb', [
             'db_table' => 'my_feature_table',
             'db_column_feature' => 'foo_feature_name',
             'db_column_state' => 'foo_is_active'
