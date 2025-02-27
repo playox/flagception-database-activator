@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "php": "^7.1.3 || ^8.0",
+    "php": "^7.4 || ^8.0",
     "flagception/flagception": "^2.0",
     "doctrine/dbal":  "^3.6 | ^4.0",
     "symfony/options-resolver": ">=2.7"
