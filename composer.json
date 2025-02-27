@@ -39,7 +39,7 @@
     }
   },
   "scripts": {
-    "phpunit": "phpunit --coverage-text -c build/phpunit.xml",
+    "phpunit": "phpunit -c build/phpunit.xml",
     "checkstyle": "phpcs --standard=./build/phpcs.xml ./src",
     "analyze": "@checkstyle",
     "test": "@phpunit"
